@@ -12,6 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
     
     let player = SKSpriteNode(imageNamed: "player")
+    let coin = SKSpriteNode(imageNamed: "coin")
     
     // required init
     required init?(coder aDecoder: NSCoder) {
@@ -43,6 +44,9 @@ class GameScene: SKScene {
         player.physicsBody?.isDynamic = true
         player.physicsBody?.affectedByGravity = false
         addChild(player)
+        
+        coin.position = CGPoint(x: size.width / 3.0, y: 450.0)
+        addChild(coin)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
