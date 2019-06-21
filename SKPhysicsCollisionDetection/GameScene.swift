@@ -34,6 +34,8 @@ class GameScene: SKScene {
     override init(size:CGSize) {
         
         super.init(size: size)
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.5)
         
         backgroundColor = SKColor.white
         
