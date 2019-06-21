@@ -24,9 +24,9 @@ class GameScene: SKScene {
         
         let xPoint = pos.x
         
-        if (xPoint > player.position.x) {
+        if xPoint > player.position.x {
             player.physicsBody?.applyImpulse(CGVector(dx: 5.0, dy: 0.0))
-        } else if (xPoint < player.position.x) {
+        } else if xPoint < player.position.x {
             player.physicsBody?.applyImpulse(CGVector(dx: -5.0, dy: 0.0))
         }
     }
@@ -43,9 +43,13 @@ class GameScene: SKScene {
         player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2.0)
         player.physicsBody?.isDynamic = true
         player.physicsBody?.affectedByGravity = false
+        player.physicsBody?.allowsRotation = false
         addChild(player)
         
-        coin.position = CGPoint(x: size.width / 3.0, y: 450.0)
+        coin.position = CGPoint(x: size.width / 4.0, y: 450.0)
+        coin.physicsBody = SKPhysicsBody(circleOfRadius: coin.size.width / 2.0)
+        coin.physicsBody?.isDynamic = true
+        coin.physicsBody?.affectedByGravity = true
         addChild(coin)
     }
     
@@ -56,4 +60,12 @@ class GameScene: SKScene {
             break
         }
     }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        print("CONTACT! OH MY GOSH! THERE'S CONTACT!")
+    }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+    
 }
