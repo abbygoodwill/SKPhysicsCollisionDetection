@@ -19,6 +19,17 @@ class GameScene: SKScene {
         super.init(coder: aDecoder)
     }
     
+    func touchDown(atPoint pos: CGPoint) {
+        
+        let xPoint = pos.x
+        
+        if (xPoint > player.position.x) {
+            player.physicsBody?.applyImpulse(CGVector(dx: 5.0, dy: 0.0))
+        } else if (xPoint < player.position.x) {
+            player.physicsBody?.applyImpulse(CGVector(dx: -5.0, dy: 0.0))
+        }
+    }
+    
     override init(size:CGSize) {
         
         super.init(size: size)
@@ -28,6 +39,17 @@ class GameScene: SKScene {
         player.size.width = player.size.width / 3.0
         player.size.height = player.size.height / 3.0
         player.position = CGPoint(x: size.width / 2.0, y: 80.0)
+        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2.0)
+        player.physicsBody?.isDynamic = true
+        player.physicsBody?.affectedByGravity = false
         addChild(player)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        for t in touches {
+            self.touchDown(atPoint: t.location(in:self))
+            break
+        }
     }
 }
