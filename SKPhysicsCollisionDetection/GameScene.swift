@@ -59,6 +59,7 @@ class GameScene: SKScene {
         coin.physicsBody?.affectedByGravity = true
         coin.physicsBody?.categoryBitMask = CollisionCategoryCoin
         coin.physicsBody?.collisionBitMask = 0
+        coin.name = "GOLD_COIN"
         addChild(coin)
     }
     
@@ -71,7 +72,13 @@ class GameScene: SKScene {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print("CONTACT! OH MY GOSH! THERE'S CONTACT!")
+        //print("CONTACT! OH MY GOSH! THERE'S CONTACT!")
+        
+        let nodeB = contact.bodyB.node
+        
+        if nodeB?.name == "GOLD_COIN" {
+            nodeB?.removeFromParent()
+        }
     }
 }
 
